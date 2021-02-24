@@ -1,0 +1,6 @@
+watchdog
+streamlit
+pandas
+plotly
+requests
+tweepy
