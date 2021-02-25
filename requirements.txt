@@ -1,6 +1,7 @@
 watchdog
 streamlit
 pandas
+numpy
 plotly
 requests
 tweepy
