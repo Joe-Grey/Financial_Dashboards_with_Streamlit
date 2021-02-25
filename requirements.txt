@@ -6,3 +6,4 @@ plotly
 requests
 tweepy
 python-dotenv
+praw
