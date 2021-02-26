@@ -7,3 +7,4 @@ requests
 tweepy
 python-dotenv
 praw
+yfinance

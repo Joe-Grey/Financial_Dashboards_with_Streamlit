@@ -21,6 +21,17 @@ def load_wallstreetbets_dash():
     counttotal=0 # total number of comment read
     submissions_counter=0
 
+    # So the pseudocode of what we want to do looks like this
+    '''
+    We are now ready to “read” comments.
+    We will loop over the hot post.
+    Check if the post (submission) is sticky?
+    If it is sticky and we skipped the first few (5) posts.
+    Get comments for the submission.
+    If we get a “MoreComments” just skip for the next comment.
+    Go over all tickers and see if a ticker is mentioned in the comment.
+    '''
+
     for submissions in hot:
         if not submissions.stickied:
             submissions_counter+=1
@@ -38,3 +49,5 @@ def load_wallstreetbets_dash():
     output=pd.DataFrame(data={'Tick': tickerlist, 'Counts': sum})
     st.write('Total comments read: ',counttotal)
     st.write(output[output['Counts']>0])
+    
+    st.write(output)
