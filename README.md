@@ -13,7 +13,9 @@
 <https://www.tweepy.org/>
 
 ## Documentation on reading from Reddit (wallstreetbets)
-<https://praw.readthedocs.io/en/latest/getting_started/authentication.html#code-flow>
+<https://www.reddit.com/dev/api/>
+
+<https://praw.readthedocs.io/en/latest/getting_started/authentication.html>
 
 #### Found code on implementing praw and scraping wallsterrt bets:
 <https://medium.datadriveninvestor.com/scraping-wallstreetbets-for-stocks-signals-414e63ace210>

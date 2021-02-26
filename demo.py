@@ -41,3 +41,7 @@ st.dataframe(df)  # Same as st.write(df)
 # Display an image (URL or path)
 st.subheader('Displaying a Image (via URL):')
 st.image('https://www.geckoboard.com/uploads/CEO-dashboard-geckoboard-2.png')
+
+
+st.write('$123'.isalpha())
+st.write('$AMG'.isalpha())
