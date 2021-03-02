@@ -12,3 +12,4 @@ psaw
 matplotlib
 pandas_datareader
 scikit-learn
+selenium
