@@ -4,12 +4,13 @@ import tweepy_dash
 import wallstreetbets_dash
 import chart_dash
 import reddit_dash
+import stock_prediction_dash
 
 # Adding a sidebar
 st.sidebar.title('Options')
 
     # Adding selectbox to sidebar
-dash_select = st.sidebar.selectbox('Which Dashboard?', ('twitter', 'wallstreetbets', 'stocktwits', 'chart', 'test_reddit'), 4)
+dash_select = st.sidebar.selectbox('Which Dashboard?', ('twitter', 'wallstreetbets', 'stocktwits', 'chart', 'test_reddit', 'stock prediction'), 5)
 
 st.markdown(f"<h1 style='text-align: center;'>{dash_select}</h1>", unsafe_allow_html=True)
 
@@ -27,5 +28,8 @@ if dash_select == 'chart':
 
 if dash_select == 'test_reddit':
     reddit_dash.load_reddit_dash()
+
+if dash_select == 'stock prediction':
+    stock_prediction_dash.load_chart_dash()
     
     

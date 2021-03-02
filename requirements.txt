@@ -9,3 +9,6 @@ python-dotenv
 praw
 yfinance
 psaw
+matplotlib
+pandas_datareader
+scikit-learn
