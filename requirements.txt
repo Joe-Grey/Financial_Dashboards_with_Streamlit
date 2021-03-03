@@ -13,3 +13,6 @@ matplotlib
 pandas_datareader
 scikit-learn
 selenium
+pulp
+cvxopt
+PyPortfolioOpt

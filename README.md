@@ -1,5 +1,8 @@
 # Financial_Dashboards_with_Streamlit
 
+## For Portfolio to work:
+I had to install gcc & XCode
+
 ## Youtube URL:
 <https://www.youtube.com/watch?v=0ESc1bh3eIg&t=2627s>
 
