@@ -29,6 +29,18 @@ I had to install gcc & XCode
 ### How to deploy Streamlit App (to be verified)
 <https://www.youtube.com/watch?v=jJTa625q85o>
 
+
+## Need to add .env file with the following details from Twitter & Reddit apps:
+TWITTER_CONSUMER_API_KEY = *key*
+TWITTER_CONSUMER_API_KEY_SECRET = *key*
+TWITTER_BEARER_TOKEN = *key*
+TWITTER_ACCESS_TOKEN = *key*
+TWITTER_ACCESS_TOKEN_SECRET = *key*
+
+REDDIT_CLIENT_ID = *key*
+REDDIT_CLIENT_SECRET = *key*
+REDDIT_USER_AGENT = *key*
+
 ## On Linux EC2:
 Updaed VM: `sudo yum update`
 Had to install Git: `sudo yum install git -y`
