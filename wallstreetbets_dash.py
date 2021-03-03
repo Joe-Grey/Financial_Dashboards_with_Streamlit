@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import praw
 from praw.models import MoreComments
 import pandas as pd
+import csv
 
 def load_wallstreetbets_dash():
     reddit=praw.Reddit(client_id=os.getenv("REDDIT_CLIENT_ID"),
@@ -12,7 +13,10 @@ def load_wallstreetbets_dash():
                user_agent="testscript by u/fakebot3",)
     subreddit = reddit.subreddit('wallstreetbets')
 
-    tickerlist=['GME', 'AMC', 'SPCE', 'FUBO', 'BBBY', 'LGND', 'FIZZ', 'SPWR', 'SKT', 'GSX', 'TR', 'GOGO', 'AXDX', 'BYND', 'OTRK', 'CLVS', 'RKT', 'SRG', 'IRBT', 'PRTS', 'PGEN', 'TSLA']
+
+    with open('stock_ticker_list.csv', newline='') as f:
+        reader = csv.reader(f)
+        tickerlist = list(reader)
 
     num_limit = st.sidebar.slider("Limit on topics", min_value=1, max_value=200, value=10)
 
