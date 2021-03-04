@@ -27,12 +27,14 @@ def load_reddit_dash():
         
         if len(cashtags) > 0:
             if len(cashtags) > 1:
+                t = list()
                 for tag in cashtags:
                     st.subheader(tag)
             else:
                 st.subheader(cashtags[0])
-            
-            st.write(submission.created_utc)
+
+            time = dt.datetime.utcfromtimestamp(submission.created_utc).strftime('%A, %d %b %Y - %X')
+            st.write(time)
             st.write(submission.title)
             st.write(submission.url)
             st.markdown('<hr>', unsafe_allow_html=True)

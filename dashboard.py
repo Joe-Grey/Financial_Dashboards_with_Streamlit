@@ -11,16 +11,16 @@ import stock_portfolio_dash
 st.sidebar.title('Options')
 
     # Adding selectbox to sidebar
-dash_select = st.sidebar.selectbox('Which Dashboard?', ('twitter', 'wallstreetbets', 'stocktwits', 'chart', 'test_reddit', 'stock prediction', 'stock portfolio'), 2)
+dash_select = st.sidebar.selectbox('Which Dashboard?', ('twitter', 'wallstreetbets', 'stocktwits', 'chart', 'reddit', 'stock prediction', 'stock portfolio'), 4)
 
-st.markdown(f"<h1 style='text-align: center;'>{dash_select}</h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='text-align: center;'>{dash_select.upper()}</h1>", unsafe_allow_html=True)
 
 if dash_select == 'twitter':
     st.markdown(f"<h2 style='text-align: center;'>Getting tweets from known stock traders</h2>", unsafe_allow_html=True)
     tweepy_dash.load_tweepy_dash()
 
 if dash_select == 'wallstreetbets':
-    st.markdown(f"<h2 style='text-align: center;'>Getting a count of the number of times a particular stock is mentioned</h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center;'>Getting a count of the number of times a particular stock is mentioned on the subreddit of wallstreetbets</h2>", unsafe_allow_html=True)
     wallstreetbets_dash.load_wallstreetbets_dash()
 
 if dash_select == 'stocktwits':
@@ -29,9 +29,11 @@ if dash_select == 'stocktwits':
     stocktwits_dash.load_socktwits_dash()
 
 if dash_select == 'chart':
+    st.markdown(f"<h2 style='text-align: center;'>Displays a particular stocks history on a chart and as a table</h2>", unsafe_allow_html=True)
     chart_dash.load_chart_dash()
 
-if dash_select == 'test_reddit':
+if dash_select == 'reddit':
+    st.markdown(f"<h2 style='text-align: center;'>Gets all the posts that mention stocks on the subreddit of wallstreetbets</h2>", unsafe_allow_html=True)
     reddit_dash.load_reddit_dash()
 
 if dash_select == 'stock prediction':
