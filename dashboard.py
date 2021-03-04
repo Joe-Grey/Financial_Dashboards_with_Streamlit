@@ -11,7 +11,7 @@ import stock_portfolio_dash
 st.sidebar.title('Options')
 
     # Adding selectbox to sidebar
-dash_select = st.sidebar.selectbox('Which Dashboard?', ('twitter', 'wallstreetbets', 'stocktwits', 'chart', 'test_reddit', 'stock prediction', 'stock portfolio'), 1)
+dash_select = st.sidebar.selectbox('Which Dashboard?', ('twitter', 'wallstreetbets', 'stocktwits', 'chart', 'test_reddit', 'stock prediction', 'stock portfolio'), 2)
 
 st.markdown(f"<h1 style='text-align: center;'>{dash_select}</h1>", unsafe_allow_html=True)
 
@@ -24,6 +24,8 @@ if dash_select == 'wallstreetbets':
     wallstreetbets_dash.load_wallstreetbets_dash()
 
 if dash_select == 'stocktwits':
+    st.markdown(f"<h4 style='text-align: center;'>(Stocktwits is like Twitter for traders & investors)</h4>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center;'>Pulls the feed that mentions a particular stock</h2>", unsafe_allow_html=True)
     stocktwits_dash.load_socktwits_dash()
 
 if dash_select == 'chart':
