@@ -31,7 +31,7 @@ def load_chart_dash():
     df = web.DataReader(STOCK_TICKER, data_source='yahoo', start=GET_STOCK_FROM_SELECTED_STOCK_START_DATE, end=YESTERDAY_DATE)
     df = df.iloc[::-1]
 
-    st.subheader('Stock price history for: ' + str(get_company_name(STOCK_TICKER)))
+    st.subheader(f'Stock price history for: {get_company_name(STOCK_TICKER)}')
     st.write(df.iloc[::-1]) # Printing in reverse order so the latest date shows first
 
     # Get the Adjusted CLose price - INDEPENDANT VARIABLE
@@ -72,6 +72,7 @@ def load_chart_dash():
 
     # Testing model
     st.header('TESTING THE MODELS:')
+    st.write('(Score returns the coefficient of determination R^2 of the prediction - best possible score is 1.0)')
     svr_confidence = svm_svr.score(x_test, y_test)
     st.subheader('Testing Support Vector Model Score:')
     st.write('Score:', svr_confidence)
@@ -80,7 +81,10 @@ def load_chart_dash():
     st.subheader('Testing Linear Regression Model:')
     st.write('Score:', lr_confidence)
 
-    st.write('(Score returns the coefficient of determination R^2 of the prediction - The best possible score is 1.0)')
+    if svr_confidence > lr_confidence:
+        st.subheader('Support Vector scored better than Linear Regression')
+    else:
+        st.subheader('Linear Regression scored better than Support Vector')
     
     ### Set the values we want to forcast on ###
     # Set 'DAYS_TO_FUTURE_PREDICT' equal to the last DAYS_TO_FUTURE_PREDICT rows of the original dataset from Adj. Close cloumn
@@ -106,12 +110,6 @@ def load_chart_dash():
     lr_predictions_df = pd.DataFrame(lr_predictions, columns = ['Adj Close'], index=list_of_future_dates)
     st.write(lr_predictions_df)
 
-
-    if svr_confidence > lr_confidence:
-        st.header('Support Vector scored better than Linear Regression')
-    else:
-        st.header('Linear Regression scored better than Support Vector')
-
     
     #get_SVM_best_prices():
     st.header('SVM prediction loop to find out when to buy & sell')
@@ -132,12 +130,11 @@ def load_chart_dash():
             set_sell_price_date = future_date
         last_date = YESTERDAY_DATE + timedelta(days=future_day)
 
-    st.write('Date started:', first_date.strftime('%b %d, %Y'))
-    st.write('Date ended:', last_date.strftime('%b %d, %Y'))
+    st.text('Date started:' + str(first_date.strftime('%b %d, %Y')) +'\tDate ended:' + str(last_date.strftime('%b %d, %Y')))
     st.write('\nThe lowest & highest buy & sell prices within the next ' + str(DAYS_TO_FUTURE_PREDICT) + ' days:')
-    st.write('\nLOWEST Buy Price:\t' + str(set_buy_price_date.strftime('%b %d, %Y')) + '        $' + str(set_buy_price))
-    st.write('HIGHEST Sell PRICE:\t' + str(set_sell_price_date.strftime('%b %d, %Y')) + '        $' + str(set_sell_price))
-    st.write('\nDifference: $' + str(set_sell_price - set_buy_price))
+    st.text('\nLOWEST Buy Price:\t' + str(set_buy_price_date.strftime('%b %d, %Y')) + '\t$' + str(round(set_buy_price,2)))
+    st.text('HIGHEST Sell PRICE:\t' + str(set_sell_price_date.strftime('%b %d, %Y')) + '\t$' + str(round(set_sell_price,2)))
+    st.text('\nDifference: $' + str(round(set_sell_price - set_buy_price,2)))
 
     # get_LR_best_prices():
     st.header('\nLR prediction loop to find out when to buy & sell')
@@ -147,8 +144,8 @@ def load_chart_dash():
     set_sell_price_date = dt.datetime.now().date()
 
     first_date = YESTERDAY_DATE + timedelta(days=1)
-    for future_day in range(1, len(svm_predictions)+1):
-        future_price = svm_predictions[future_day-1]
+    for future_day in range(1, len(lr_predictions)+1):
+        future_price = lr_predictions[future_day-1]
         future_date = YESTERDAY_DATE + timedelta(days=future_day)
         if future_price < set_buy_price:
             set_buy_price = future_price
@@ -158,9 +155,8 @@ def load_chart_dash():
             set_sell_price_date = future_date
         last_date = YESTERDAY_DATE + timedelta(days=future_day)
 
-    st.write('Date started:', first_date.strftime('%b %d, %Y'))
-    st.write('Date ended:', last_date.strftime('%b %d, %Y'))
+    st.text('Date started:' + str(first_date.strftime('%b %d, %Y')) +'\tDate ended:' + str(last_date.strftime('%b %d, %Y')))
     st.write('\nThe lowest & highest buy & sell prices within the next ' + str(DAYS_TO_FUTURE_PREDICT) + ' days:')
-    st.write('\nLOWEST Buy Price:\t' + str(set_buy_price_date.strftime('%b %d, %Y')) + '        $' + str(set_buy_price))
-    st.write('HIGHEST Sell PRICE:\t' + str(set_sell_price_date.strftime('%b %d, %Y')) + '        $' + str(set_sell_price))
-    st.write('\nDifference: $' + str(set_sell_price - set_buy_price))
+    st.text('\nLOWEST Buy Price:\t' + str(set_buy_price_date.strftime('%b %d, %Y')) + '\t$' + str(round(set_buy_price,2)))
+    st.text('HIGHEST Sell PRICE:\t' + str(set_sell_price_date.strftime('%b %d, %Y')) + '\t$' + str(round(set_sell_price,2)))
+    st.text('\nDifference: $' + str(round(set_sell_price - set_buy_price,2)))
