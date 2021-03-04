@@ -11,7 +11,7 @@ import stock_portfolio_dash
 st.sidebar.title('Options')
 
     # Adding selectbox to sidebar
-dash_select = st.sidebar.selectbox('Which Dashboard?', ('twitter', 'wallstreetbets', 'stocktwits', 'chart', 'reddit', 'stock portfolio', 'stock prediction'), 6)
+dash_select = st.sidebar.selectbox('Which Dashboard?', ('twitter', 'wallstreetbets', 'stocktwits', 'chart', 'reddit', 'stock portfolio', 'stock prediction'), 0)
 
 st.markdown(f"<h1 style='text-align: center;'>{dash_select.upper()}</h1>", unsafe_allow_html=True)
 

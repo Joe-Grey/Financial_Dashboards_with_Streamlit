@@ -74,7 +74,7 @@ def load_portfolio_dash(RANDOM_NUMBER_SELECTED_IN, PORTFOLIO_VALUE_IN):
         if progress_count <= 1:
             my_progress_bar.progress(progress_count)
         else:
-            my_progress_bar.progress(1)
+            my_progress_bar.progress(100)
 
     #Drooping stock values
     no_data_for_ticker_list = []

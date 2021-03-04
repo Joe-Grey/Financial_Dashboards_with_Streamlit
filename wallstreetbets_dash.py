@@ -30,8 +30,8 @@ def load_wallstreetbets_dash():
             tick_symbol = str(row).replace("['", "").replace("']", "")
             tickerlist.append(tick_symbol)
 
-
-    num_limit = st.sidebar.slider("Limit on topics", min_value=1, max_value=200, value=10)
+    st.sidebar.write()
+    num_limit = st.sidebar.slider("Limit on topics (The bigger the number the longer it will take to load)", min_value=1, max_value=200, value=10)
 
     hot = subreddit.hot(limit=num_limit)
     sum=[0]*len(tickerlist) # our output array
@@ -75,5 +75,6 @@ def load_wallstreetbets_dash():
     
     output['Company'] = company_name
     st.write('Total comments read: ',counttotal)
+    st.text('(Only displaying counts > 50)')
     st.write(output[output['Counts']>0])
 

@@ -22,7 +22,7 @@ def load_chart_dash():
         # Get the data for the stock AAPL
         data = yf.download(stock_ticker,start_date,YESTERDAY_DATE).reset_index()
 
-        st.markdown(f"<h1 style='text-align: center;'>{stock_ticker.upper} - {get_company_name(stock_ticker)}</h1>", unsafe_allow_html=True)
+        st.markdown(f"<h1 style='text-align: center;'>{stock_ticker.upper()} - {get_company_name(stock_ticker)}</h1>", unsafe_allow_html=True)
 
         fig = go.Figure(data=[go.Candlestick(x=data['Date'].dt.date,
                         open=data['Open'],

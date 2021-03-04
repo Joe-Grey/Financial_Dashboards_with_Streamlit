@@ -14,7 +14,7 @@ def load_socktwits_dash():
     try:
         req = requests.get(f'https://api.stocktwits.com/api/2/streams/symbol/{symbol_input}.json')
         data = req.json()
-        st.markdown(f"<h1 style='text-align: center;'>{symbol_input.upper} - {get_company_name(symbol_input)}</h1>", unsafe_allow_html=True)
+        st.markdown(f"<h1 style='text-align: center;'>{symbol_input.upper()} - {get_company_name(symbol_input)}</h1>", unsafe_allow_html=True)
         st.markdown('<hr>', unsafe_allow_html=True)
         for message in data['messages']:
             st.image(message['user']['avatar_url'])

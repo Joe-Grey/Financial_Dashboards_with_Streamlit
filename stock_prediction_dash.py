@@ -25,7 +25,7 @@ def load_chart_dash():
     YESTERDAY_DATE = dt.date.today() - dt.timedelta(days=1)
     STOCK_TICKER = st.sidebar.text_input("Symbol", value='AAPL', max_chars=5, key=None, type='default')
     GET_STOCK_FROM_SELECTED_STOCK_START_DATE = st.sidebar.date_input("Select Start Date...", max_value=YESTERDAY_DATE, value=YESTERDAY_DATE + relativedelta(months=-12))
-    DAYS_TO_FUTURE_PREDICT = int(st.sidebar.slider("Days ahread to predict...", min_value=1, max_value=365, value=30)) # Number of days for our model to predict in the future
+    DAYS_TO_FUTURE_PREDICT = int(st.sidebar.slider("Days ahread to predict...", min_value=1, max_value=250, value=30)) # Number of days for our model to predict in the future
 
     # Get the stock quote
     df = web.DataReader(STOCK_TICKER, data_source='yahoo', start=GET_STOCK_FROM_SELECTED_STOCK_START_DATE, end=YESTERDAY_DATE)
