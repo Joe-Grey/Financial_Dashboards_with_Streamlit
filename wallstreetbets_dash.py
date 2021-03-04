@@ -5,6 +5,15 @@ import praw
 from praw.models import MoreComments
 import pandas as pd
 import csv
+import requests
+
+# Create a function to get the companies name
+def get_company_name(symbol):
+    url = 'http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+symbol+'&region=1&lang=en'
+    result = requests.get(url).json()
+    for r in result['ResultSet']['Result']:
+        if r['symbol']==symbol:
+            return r['name']
 
 def load_wallstreetbets_dash():
     reddit=praw.Reddit(client_id=os.getenv("REDDIT_CLIENT_ID"),
@@ -13,10 +22,14 @@ def load_wallstreetbets_dash():
                user_agent="testscript by u/fakebot3",)
     subreddit = reddit.subreddit('wallstreetbets')
 
-
+    # List of stock tickers
+    tickerlist = list()
     with open('stock_ticker_list.csv', newline='') as f:
         reader = csv.reader(f)
-        tickerlist = list(reader)
+        for row in reader:
+            tick_symbol = str(row).replace("['", "").replace("']", "")
+            tickerlist.append(tick_symbol)
+
 
     num_limit = st.sidebar.slider("Limit on topics", min_value=1, max_value=200, value=10)
 
@@ -49,9 +62,18 @@ def load_wallstreetbets_dash():
                         if ticker in comment.body:
                             sum[i]=sum[i]+1
     
+    
+    
 
-    output=pd.DataFrame(data={'Tick': tickerlist, 'Counts': sum})
+    output=pd.DataFrame(data={'Tick': tickerlist, 'Counts': sum}).sort_values(by=['Counts'], ascending=False)
+    output = output[output['Counts'] > 50]  
+
+    
+    company_name = list()
+    for row in output.iterrows():
+        company_name.append(get_company_name(row[1][0]))
+    
+    output['Company'] = company_name
     st.write('Total comments read: ',counttotal)
     st.write(output[output['Counts']>0])
-    
-    st.write(output)
+
