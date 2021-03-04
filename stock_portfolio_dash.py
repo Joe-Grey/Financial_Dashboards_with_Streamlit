@@ -81,7 +81,7 @@ def load_portfolio_dash(RANDOM_NUMBER_SELECTED_IN, PORTFOLIO_VALUE_IN):
     row_count_based_on_percentage = int(len(df)*(PERCENTAGE_TO_USE/100))
     for (columnName, columnData) in df.iteritems():
         if df[columnName].isnull().all():
-            st.write('Dropping : ' + str(columnName) + ' - it is all NAN')
+            #st.write('Dropping : ' + str(columnName) + ' - it is all NAN')
             no_data_for_ticker_list.append(df.columns.get_loc(columnName))
         #elif df[columnName].count() < row_count_based_on_percentage:
         #    st.write('Dropping : ' + str(columnName) + ' - < than ' + str(PERCENTAGE_TO_USE) + '% of then number of rows')
@@ -127,9 +127,13 @@ def load_portfolio_dash(RANDOM_NUMBER_SELECTED_IN, PORTFOLIO_VALUE_IN):
     portfolio_df['Discrete_val_'+str(PORTFOLIO_VALUE)] = discrete_allocation_list
 
     # How the portfolio would expect to return
-    st.write('Any Sharpe ratio over 1.0 is considered acceptable to good buy investment:',ef.portfolio_performance(verbose=True))
+    perf = ef.portfolio_performance(verbose=True)
     st.write()
-
+    st.write('Any Sharpe ratio over 1.0 is considered acceptable to good buy investment:')
+    st.write('Expected annual return:', round(perf[0],2),'%')
+    st.write('Annual volatility:',round(perf[1],2),'%')
+    st.write('Sharpe Ratio:', round(perf[0],2))
+    st.write()
     st.write('Funds Remaining: $', round(leftover,2))
 
     # Show the portfolio
